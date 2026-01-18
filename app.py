@@ -5,7 +5,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from game_data import historia # Importa sua história
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'uma_chave_secreta_aqui'
+app.config['SECRET_KEY'] = 'semlivro'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///livrojogo.db'
 
 db = SQLAlchemy(app)
@@ -57,18 +57,23 @@ def dashboard():
     return render_template('dashboard.html', tem_save=tem_save)
 
 # 3. Lógica de Iniciar/Continuar
+# No seu app.py
+
 @app.route('/setup_game/<acao>')
 @login_required
 def setup_game(acao):
     if acao == 'novo':
-        # Se existir save, deleta ou sobrescreve
+        # NOVA LÓGICA:
+        # Se o usuário já tem um save, a gente só RESETA ele para o início.
         if current_user.save_game:
-            db.session.delete(current_user.save_game)
-        
-        # Cria novo save no início
-        novo_save = SaveGame(user_id=current_user.id, current_scene='inicio')
-        db.session.add(novo_save)
-        db.session.commit()
+            current_user.save_game.current_scene = 'inicio'
+            db.session.commit() # Salva a atualização
+        else:
+            # Se não tem save nenhum, aí sim a gente cria um novo
+            novo_save = SaveGame(user_id=current_user.id, current_scene='inicio')
+            db.session.add(novo_save)
+            db.session.commit()
+            
         return redirect(url_for('jogar', cena_id='inicio'))
         
     elif acao == 'continuar':
@@ -107,10 +112,10 @@ def criar_banco():
         db.create_all()
         # Cria um usuário de teste
         if not User.query.filter_by(username='admin').first():
-            user = User(username='admin', password='123')
+            user = User(username='admin', password='Acb#231')
             db.session.add(user)
             db.session.commit()
-    return "Banco criado e usuário 'admin' (senha 123) adicionado."
+    return "Banco criado e usuário 'admin' (senha Acb#231) adicionado."
 
 if __name__ == '__main__':
     app.run(debug=True)

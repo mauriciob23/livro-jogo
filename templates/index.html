@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Acesso Restrito - Fragmentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="comic-container" style="max-width: 400px;"> <h1 class="comic-title">ACESSO RESTRITO</h1>
+        <p class="comic-subtitle">Identifique-se, Sobrevivente.</p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert-box">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/">
+            <div class="form-group">
+                <label class="form-label">CODINOME (USUÁRIO):</label>
+                <input type="text" name="username" class="comic-input" placeholder="Digite 'admin'..." required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">SENHA DE ACESSO:</label>
+                <input type="password" name="password" class="comic-input" placeholder="Digite '123'..." required>
+            </div>
+
+            <button type="submit" class="comic-btn" style="width: 100%;">ENTRAR NO SISTEMA</button>
+        </form>
+
+        <div class="text-panel" style="margin-top: 20px; font-size: 1rem; text-align: center;">
+            <p>Ano atual: 2061.<br>Status da Terra: Crítico.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

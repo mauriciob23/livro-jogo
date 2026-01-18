@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu da Missão</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="comic-container">
+        
+        <div class="comic-panel image-panel" style="background-color: #222; text-align: center; padding: 20px;">
+            <h1 class="comic-title" style="color: white; text-shadow: 4px 4px 0 #000;">FRAGMENTOS DE UM<br>FUTURO PERDIDO</h1>
+        </div>
+
+        <div class="comic-panel text-panel">
+            <p>Bem-vindo de volta, Sobrevivente.</p>
+            <p>O sistema recuperou seus dados biométricos. Qual é o seu próximo passo?</p>
+        </div>
+
+        <div class="comic-panel action-panel">
+            
+            {% if tem_save %}
+            <a href="{{ url_for('setup_game', acao='continuar') }}" class="comic-btn" style="background-color: #2ecc71; color: black;">
+                >> CONTINUAR DE ONDE PAROU
+            </a>
+            {% endif %}
+
+            <a href="{{ url_for('setup_game', acao='novo') }}" class="comic-btn">
+                INICIAR NOVA JORNADA
+            </a>
+            
+            <p style="font-size: 0.9rem; text-align: center; color: #666; font-family: 'Roboto'; margin-top: 5px;">
+                *Atenção: Iniciar uma nova jornada apagará seu progresso anterior.
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

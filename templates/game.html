@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragmentos de um Futuro Perdido</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="comic-container">
+        <div class="comic-panel image-panel">
+            <img src="{{ url_for('static', filename='images/' + cena.imagem) }}" alt="Cena do Jogo">
+        </div>
+
+        <div class="comic-panel text-panel">
+            <p>{{ cena.texto }}</p>
+        </div>
+
+        <div class="comic-panel action-panel">
+            {% if cena.opcoes %}
+                {% for opcao in cena.opcoes %}
+                    <a href="{{ url_for('jogar', cena_id=opcao.proxima_cena) }}" class="comic-btn">
+                        {{ opcao.texto }}
+                    </a>
+                {% endfor %}
+            {% else %}
+                <a href="{{ url_for('dashboard') }}" class="comic-btn end-btn">Voltar ao Menu</a>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>

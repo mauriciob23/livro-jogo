@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from game_data import historia # Importa sua história
+from game_data import historia # Importando história
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'semlivro'
@@ -57,19 +57,17 @@ def dashboard():
     return render_template('dashboard.html', tem_save=tem_save)
 
 # 3. Lógica de Iniciar/Continuar
-# No seu app.py
-
 @app.route('/setup_game/<acao>')
 @login_required
 def setup_game(acao):
     if acao == 'novo':
         # NOVA LÓGICA:
-        # Se o usuário já tem um save, a gente só RESETA ele para o início.
+        # Se o usuário já tem um save, RESETA ele para o início.
         if current_user.save_game:
             current_user.save_game.current_scene = 'inicio'
             db.session.commit() # Salva a atualização
         else:
-            # Se não tem save nenhum, aí sim a gente cria um novo
+            # Se não tem save nenhum, cria um novo
             novo_save = SaveGame(user_id=current_user.id, current_scene='inicio')
             db.session.add(novo_save)
             db.session.commit()

@@ -30,7 +30,7 @@ def load_user(user_id):
 
 # --- ROTAS ---
 
-# 1. Rota Inicial / Login
+# Rota Inicial / Login
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':

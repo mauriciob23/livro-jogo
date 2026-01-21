@@ -9,13 +9,16 @@
 <body>
 
     <div class="comic-container">
+        <div class="comic-panel text-panel">
+            <p>{{ cena.texto }}</p>
+        </div>
+
+
         <div class="comic-panel image-panel">
             <img src="{{ url_for('static', filename='images/' + cena.imagem) }}" alt="Cena do Jogo">
         </div>
 
-        <div class="comic-panel text-panel">
-            <p>{{ cena.texto }}</p>
-        </div>
+        
 
         <div class="comic-panel action-panel">
             {% if cena.opcoes %}

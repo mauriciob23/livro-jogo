@@ -2,14 +2,14 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Acesso Restrito - Fragmentos</title>
+    <title>Acesso Restrito - Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="comic-container" style="max-width: 400px;"> <h1 class="comic-title">ACESSO RESTRITO</h1>
-        <p class="comic-subtitle">Identifique-se, Sobrevivente.</p>
+        <p class="comic-subtitle">Identifique-se</p>
 
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -22,12 +22,12 @@
         <form method="POST" action="/">
             <div class="form-group">
                 <label class="form-label">CODINOME (USUÁRIO):</label>
-                <input type="text" name="username" class="comic-input" placeholder="Digite 'admin'..." required>
+                <input type="text" name="username" class="comic-input" placeholder="Digite seu usuário" required>
             </div>
 
             <div class="form-group">
                 <label class="form-label">SENHA DE ACESSO:</label>
-                <input type="password" name="password" class="comic-input" placeholder="Digite '123'..." required>
+                <input type="password" name="password" class="comic-input" placeholder="Digite sua senha..." required>
             </div>
 
             <button type="submit" class="comic-btn" style="width: 100%;">ENTRAR NO SISTEMA</button>

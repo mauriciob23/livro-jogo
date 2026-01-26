@@ -1,0 +1,19 @@
+# Ignorar pastas de Ambientes Virtuais (Pesadas e inúteis na nuvem)
+venv/
+.venv/
+bin/
+lib/
+lib64/
+include/
+
+# Ignorar arquivos compilados do Python
+__pycache__/
+*.pyc
+
+# Ignorar banco de dados local (save game e usuários locais)
+instance/
+*.db
+*.sqlite3
+
+# Ignorar configurações do editor 
+.vscode/
